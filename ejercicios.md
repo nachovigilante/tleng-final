@@ -8,9 +8,9 @@ Dar un algoritmo que decida si dos expresiones regulares denotan el mismo lengua
 
 Sea $r_1$ y $r_2$ dos expresiones regulares. Construir un **AFND** $M_1$ que acepte $L(r_1)$ y un **AFND** $M_2$ que acepte $L(r_2)$. Luego, determinizar $M_1$ y $M_2$ para obtener $M_1'$ y $M_2'$, respectivamente. Finalmente, minimizar $M_1'$ y $M_2'$ para obtener $M_1''$ y $M_2''$, respectivamente. Si $M_1''$ y $M_2''$ son isomorfos, entonces $L(r_1) = L(r_2)$.
 
-Esta opción es costosa computacionalmente, ya que hay que determinizar y minimizar los autómatas y chequear isomorfismo de grafos. Esto último es lo más costoso de todo.
+Como está explicado en el resumen, el tamaño de un autómata construido a partir de una expresión regular está acotado por el doble del tamaño de dicha expresión. Luego, $Q_1 <= 2|r_1|$ y $Q_2 <= 2|r_2|$. Por lo tanto, la complejidad temporal de la construcción de los autómatas es $O(max\{|r_1|, |r_2|\})$. Por otro lado, es necesario determinizarlos, lo que conlleva una complejidad de $O(max{2^{|r_1|}, 2^{|r_2|}})$. Finalmente, hay que minimizarlos, lo que conlleva una complejidad de ???. Chequear el isomorfismo de grafos tiene una complejidad menor o igual a una exponencial en el tamaño de los grafos, por lo que no modifica la complejidad total del algoritmo.
 
-TODO: calcular complejidad computacional de peor caso.
+Complejidad total: $O(max\{2^{|r_1|}, 2^{|r_2|}\})$
 
 ### Opción 2
 
@@ -18,13 +18,11 @@ Sea $r_1$ y $r_2$ dos expresiones regulares. Construir un **AFND** $M_1$ que ace
 
 Para chequear si $M_3'$ es vacío, se puede utilizar el algoritmo de búsqueda en profundidad (DFS) para recorrer el grafo del autómata. Si se llega a un estado final, entonces el autómata no es vacío. Si se recorren todos los estados y no se llega a un estado final, entonces el autómata es vacío.
 
-Esta opción es mejor que la anterior, ya que no hay que minimizar los autómatas ni chequear isomorfismo de grafos. Sin embargo, sigue siendo costosa computacionalmente, ya que hay que determinizar los autómatas y chequear si el autómata resultante es vacío.
+Por un análisis similar, la complejidad temporal de este algoritmo es $O(max\{2^{|r_1|}, 2^{|r_2|}\})$. Sin embargo, este algoritmo probablemente sea más eficiente que el anterior, ya que no es necesario minimizar los autómatas y chequear que sean isomorfos. La complejiad de chequear que un autómata sea vacío es $O(máx\{|r_1|, |r_2|\} * |\Sigma_1\cup\Sigma_2|)$
 
-TODO: calcular complejidad computacional de peor caso.
+### Opción 2 bis
 
-### Opción 3
-
-Podemos utilizar el lema de pumping para decidir si dos expresiones regulares denotan el mismo lenguaje.
+Podemos utilizar el lema de pumping para decidir si un lenguaje es vacío ?????.
 
 TODO: completar
 
