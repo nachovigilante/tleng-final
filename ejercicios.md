@@ -22,9 +22,16 @@ Por un análisis similar, la complejidad temporal de este algoritmo es $O(max\{2
 
 ### Opción 2 bis
 
-Podemos utilizar el lema de pumping para decidir si un lenguaje es vacío ?????.
+Podemos utilizar el lema de pumping para decidir si un lenguaje es vacío. $L(M) \neq \varnothing \iff \exists w \in L(M) \wedge |w| \lt n$.
 
-TODO: completar
+$\Leftarrow$) Trivial, si existe una palabra de longitud menor a $n$ entonces el lenguaje no es vacío.
+
+$\Rightarrow$) Supongamos que no existe palabra menor a $n$. Tomo la palabra mas corta $w$, que por suposicion es mayor o igual a $n$. Sin embargo, si es mayor o igual a $n$, por el lema de pumping, puedo descomponerla en $xyz$ con $|xy| \leq n$ y $|y| \gt 0$. Por lo tanto $xy^iz \in L(M)$ para todo $i \geq 0$, mas aún $xy^0z \in L(M).$ Entonces, $xy^0z$ tiene longitud menor a $w$. Pero dijimos que $w$ era la palabra mas corta, llegamos a un absurdo.
+
+Por lo tanto para ver si el lenguaje es vacio, basta con fijarse si alguna palabra menor a $n$ esta en el lenguaje. 
+
+TODO: COMPLEJIDAD
+
 
 ## Ejercicio 2
 
