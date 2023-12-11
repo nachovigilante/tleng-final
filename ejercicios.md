@@ -421,7 +421,13 @@ Dar un algoritmo que codeterminice un automata finito.
 
 ### Solución
 
-TODO: completar
+Pasos a seguir:
+
+- Obtener el reverso del autómata, $M'$.
+- Determinizar $M'$, $M''$.
+- Obtener el reverso de $M''$, $M'''$.
+
+Esto es correcto porque si en el autómata $M'''$ sucede que $\exists q_1, q_2, q_3 \in Q, a \in \Sigma / q_1 \in \delta(q_2, a) ∧ q_1 \in (q_3, a)$ (no es codeterminístico) entonces, como $M''$ es el reverso de $M'''$, pasa que $\exists q_1, q_2, q_3 \in Q, a \in \Sigma / q_1 \in \delta(q_2, a) ∧ q_1 \in (q_3, a)$ (no es determinístico). Pero esto es absurdo, ya que $M''$ es determinístico por definición.
 
 ## Ejercicio 27
 
