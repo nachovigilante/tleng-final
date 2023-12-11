@@ -317,6 +317,8 @@ Por lo tanto, si iniciamos con la configuración de $(q_0, w', Z_0) = (q_0, wv, 
 
 TODO: completar
 
+Nota al lector: no se si es por acá, creo que me enrrosqué de más
+
 ## Ejercicio 16
 
 Dado $R$ un lenguaje regular, y dado $L$ un lenguaje libre de contexto deterministico, ¿Es decidible si $L=R$? Es decir, ¿hay un algoritmo capaz de decidir la igualdad? En caso de que sí, dar tal algoritmo y justificar. En caso de que no, dar la demostración de indecibilidad.
