@@ -441,7 +441,28 @@ Mostrar que todo lenguaje lineal sin la palabra vacía tiene una gramática dond
 
 ### Solución
 
-TODO: completar
+**TODO: CHEQUEAR SI HAY QUE ELIMINAR LAS PRODUCCIONES CON CUERPO LAMBDA PRIMERO**
+
+Sea $w = w_1...w_n$
+* Caso $A \rightarrow w$:
+
+   * $A \rightarrow w_1A_1$
+   * $A_1 \rightarrow w_2A_2$
+   * ...
+   * $A_{n-1} \rightarrow w_n$
+
+   Hace que se genere de a poco la palabra $w$, simbolo por simbolo de izquierda a derecha.
+
+* Caso $A \rightarrow aBx$:
+   * $A \rightarrow aA_1$
+   * $A1 \rightarrow A_2x_n$
+   * $A_2 \rightarrow A_3x_{n-1}$
+   * ...
+   * $A_{n-1} \rightarrow Bx_1$
+
+   Primero fija la a de la izquierda y despues va fijando de a un simbolo de derecha a izquierda la x.
+
+
 
 ## Ejercicio 24
 
