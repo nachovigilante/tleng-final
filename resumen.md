@@ -44,6 +44,36 @@ TODO: chequear $|\Gamma^*|$
 
 ### Complejidades
 
+#### Complejidad de construir un AFND a partir de una ER
+
+Sea $r$ una ER. El tamaño $|r|$ se mide por el número de símbolos que contiene, excluidos los paréntesis. Entonces
+
+$|\emptyset | = | \lambda | = |a| = 1, |s + t| = | s \cdot t | = | s | + | t | +1, |s^*| = 1+|s|$.
+
+Denotemos por $n(s)$ el número de estados del autómata $N(s)$. Entonces
+
+$n (\emptyset) = n(\lambda) = n(a) = 2,$
+
+$n(s + t) = n(s)+n(t)+2,$
+
+$n(s \cdot t) = n(s)+n(t)-1,$
+
+$n(s^*) = 2+n(s)$
+
+En todos los casos $n(s) \leq 2|s|$
+
+en otras palabras, el número de estados es como máximo el doble del tamaño de la expresión.
+
+Para el número de transiciones, se aplica un argumento aún más simple: de cada estado salen como máximo dos flechas, por lo que el número de transiciones es como máximo el doble del número de estados.
+
+#### Complejidad de determinizar un AFD
+
+Sea $M = \langle Q, \Sigma, \delta, q_0, F \rangle$ un **AFD**. Sea $n = |Q|$. Entonces, el algoritmo de determinización tiene complejidad $O(2^n)$.
+
+#### Complejidad de minimizar un AFD
+
+Sea $M = \langle Q, \Sigma, \delta, q_0, F \rangle$ un **AFD**. Sea $n = |Q|$, y $s = |\Sigma|$. Entonces, el algoritmo de minimización tiene complejidad $O(ns*log(n))$ (Hopcroft), $O(n^2s)$ (Moore) o $O(2^n)$ (Brozozowski).
+
 TODO: completar
 
 ## Teoremas y algoritmos
