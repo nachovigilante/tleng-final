@@ -65,7 +65,7 @@ TODO: calcular complejidad computacional de peor caso.
 
 ### Opción 2
 
-Usar el lema de pumping para lenguajes regulares. No entiendo bien esto. 
+Usar el lema de pumping para lenguajes regulares. No entiendo bien esto.
 
 $L(M)$ es infinito $\Longleftrightarrow$ $\exists w \in L(M)$ con $n \leq |w| \lt 2n$
 
@@ -128,23 +128,23 @@ Podemos ver que A es recursiva a derecha, ya que $A \Rightarrow aB \Rightarrow a
 
 ### Algoritmo de eliminación de recursión a derecha
 
-* Para sacar la recursión a derecha inmediata tengo que pasar las producciones de la forma:
-   - $A \rightarrow αA |\ βA |\ σ_1 |\ σ_2 $ 
-   
+- Para sacar la recursión a derecha inmediata tengo que pasar las producciones de la forma:
+  - $A \rightarrow \alpha A |\ βA |\ \sigma_1 |\ \sigma_2$
+
    a la forma:
 
-   - $ A \rightarrow B σ_1\ |\ B σ_2 $
-   - $ B \rightarrow B α\ |\ B β \ |\ α \ |\ β  $
+  - $A \rightarrow B \sigma_1\ |\ B \sigma_2$
+  - $B \rightarrow B \alpha \ |\ B β \ |\ \alpha \ |\ β$
 
    Esto hace que el arbol en vez de recursivo a derecha sea a izquierda. La idea intuitiva es que primero fija el ultimo terminal y despues va recursivamente para atras.
 
-* La idea para sacar la recursión a derecha no inmediata es poner un orden entre los símbolos terminales y en cada paso resolvemos un símbolo (del principio al final) donde cada producción tiene que terminar con un terminal o no terminal mayor a él.
+- La idea para sacar la recursión a derecha no inmediata es poner un orden entre los símbolos terminales y en cada paso resolvemos un símbolo (del principio al final) donde cada producción tiene que terminar con un terminal o no terminal mayor a él.
 
-   ```
+   ```pseudo
    para i = 1 hasta n
       para j = 1 hasta i-1
-         si (A_i -> α A_j y Aj -> β_1 | ... | β_n) ∈ P
-            Reemplazar A_i -> α A_j por A_i -> α β_1 | ... | α β_n
+         si (A_i -> α  A_j y Aj -> β_1 | ... | β_n) ∈ P
+            Reemplazar A_i -> α  A_j por A_i -> α  β_1 | ... | α  β_n
       Eliminar la recursión a derecha inmediata de A_i
    ```
 
@@ -317,23 +317,22 @@ $$\delta'(q, (\lambda, \lambda), Z) = \{(q', \gamma)\ |\ (q', \gamma) \in \delta
 Luego, como sabemos que todo autómata de pila de simple entrada que acepta por estado final es equivalente a uno que acepta por pila vacía, entonces $P'$ es equivalente a un autómata de pila de simple entrada $P'' = \langle Q, \Delta, \Gamma, \delta'', q_0, Z_0, \emptyset \rangle$ que acepta por pila vacía. Por lo tanto, $P$ es equivalente a $P''$. Finalmente, podemos construir un autómata de pila de doble entrada $P''' = \langle Q, \Sigma, \tau, \Gamma, \delta''', q_0, Z_0, \emptyset \rangle$ que acepta por pila vacía, donde $\delta'''$ es la función de transición de $P''$ extendida a dos cintas (proceso inverso al que hicimos al principio).
 
 ### Opción 2
+
 Construimos un autómata de pila vacía  $P' = \langle Q \cup \{q0', qf\}, \Sigma, \tau, \Gamma \ \cup \{ X_0 \}, \delta', q_0', X_0, \empty \rangle$. Para esto, definimos la función de transición $\delta'$ de la siguiente manera:
 
-
-* $\delta'(q_0', \lambda, \lambda, X_0) = \{(q_0, Z_0X_0)\}$ que agregamos el nuevo símbolo abajo de todo en la pila.
-* $\forall q \in Q, \forall w \in \Sigma \cup \{\lambda\}, \forall x \in \tau \cup \{\lambda\}, \forall z \in \Gamma : \delta'(q, w, x, z) = \delta(q, w, x, z)$ para simular el comportamiento de $P$.
-* $\forall f \in F, \forall z \in \Gamma \cup \{X_0\}: \delta'(f, \lambda, \lambda, z) = \{(q_f, \lambda)\}$ que agregamos que los finales vayan al nuevo estado.
-* $\forall z \in \Gamma \cup \{X_0\}: \delta'(q_f, \lambda, \lambda, z) = \{(q_f, \lambda)\}$ que desapila.
+- $\delta'(q_0', \lambda, \lambda, X_0) = \{(q_0, Z_0X_0)\}$ que agregamos el nuevo símbolo abajo de todo en la pila.
+- $\forall q \in Q, \forall w \in \Sigma \cup \{\lambda\}, \forall x \in \tau \cup \{\lambda\}, \forall z \in \Gamma : \delta'(q, w, x, z) = \delta(q, w, x, z)$ para simular el comportamiento de $P$.
+- $\forall f \in F, \forall z \in \Gamma \cup \{X_0\}: \delta'(f, \lambda, \lambda, z) = \{(q_f, \lambda)\}$ que agregamos que los finales vayan al nuevo estado.
+- $\forall z \in \Gamma \cup \{X_0\}: \delta'(q_f, \lambda, \lambda, z) = \{(q_f, \lambda)\}$ que desapila.
 
 <!-- L(M) ⊆ L(M’): si x ∈ L(M) entonces (q0, w, x, Z0) |- (f, λ, λ, γ) que entonces (q0, w, x, Z0X0) |- (f, λ, λ, γX0) porque solo le agregue abajo de todo algo en la pila. Por definición de M’ (q0’, w, x, X0) |- (q0, w, x, Z0X0) |- (f, λ, λ, γX0) |- (qλ, λ, λ, λ) que significa que x ∈ L(M’) 
  L(M’) ⊆ L(M): si x ∈ L(M’) entonces (q0’, w, x, X0) |- (q0, w, x, Z0X0) |- (f, λ, λ, γX0) |- (qλ, λ, λ, λ) pero si (q0, w, x, Z0X0) |- (f, λ, λ, γX0) significa que x ∈ L(M). -->
 
+Correctitud:
 
-Correctitud: 
+- $L(M) \subseteq L(M')$: si $x \in L(M)$ $\Rightarrow$ $(q_0, w, x, Z_0) \vdash (f, \lambda, \lambda, \gamma)$ $\Rightarrow$ $(q_0, w, x, Z_0X_0) \vdash (f, \lambda, \lambda, \gamma X_0)$ porque solo le agregue abajo de todo algo en la pila. Por definición de $M'$ $(q_0', w, x, X_0) \vdash (q_0, w, x, Z_0X_0) \vdash (f, \lambda, \lambda, \gamma X_0) \vdash (q_\lambda, \lambda, \lambda, \lambda)$ que significa que $x \in L(M')$.
 
-* $L(M) \subseteq L(M')$: si $x \in L(M)$ $\Rightarrow$ $(q_0, w, x, Z_0) \vdash (f, \lambda, \lambda, \gamma)$ $\Rightarrow$ $(q_0, w, x, Z_0X_0) \vdash (f, \lambda, \lambda, \gamma X_0)$ porque solo le agregue abajo de todo algo en la pila. Por definición de $M'$ $(q_0', w, x, X_0) \vdash (q_0, w, x, Z_0X_0) \vdash (f, \lambda, \lambda, \gamma X_0) \vdash (q_\lambda, \lambda, \lambda, \lambda)$ que significa que $x \in L(M')$.
-
-* $L(M') \subseteq L(M)$: si $x \in L(M')$ $\Rightarrow$ $(q_0', w, x, X_0) \vdash (q_0, w, x, Z_0X_0) \vdash (f, \lambda, \lambda, \gamma X_0) \vdash (q_\lambda, \lambda, \lambda, \lambda)$ pero si $(q_0, w, x, Z_0X_0) \vdash (f, \lambda, \lambda, \gamma X_0)$ significa que $x \in L(M)$.
+- $L(M') \subseteq L(M)$: si $x \in L(M')$ $\Rightarrow$ $(q_0', w, x, X_0) \vdash (q_0, w, x, Z_0X_0) \vdash (f, \lambda, \lambda, \gamma X_0) \vdash (q_\lambda, \lambda, \lambda, \lambda)$ pero si $(q_0, w, x, Z_0X_0) \vdash (f, \lambda, \lambda, \gamma X_0)$ significa que $x \in L(M)$.
 
 ## Ejercicio 14
 
@@ -358,7 +357,7 @@ Sea $w \in L$. Supongamos que existe $w' \in L$ tal que $w$ es prefijo propio de
 
 Por lo tanto, si iniciamos con la configuración de $(q_0, w', Z_0) = (q_0, wv, Z_0)$, entonces $(q_0, wv, Z_0) \stackrel{*}{\vdash} (p, v, \lambda)$. Luego, como la pila está vacía, entonces $v = \lambda.$
 
-Si no es determinístico, puede haber más de una configuración posible producto de la derivación de $(q_0, w, Z_0)$. Por lo tanto, $w$ y $w'$ pueden diferir en la derivación de la pila, y aceptar ambas. Entonces, no pasa lo mismo con los autómatas de pila no determinísticos. 
+Si no es determinístico, puede haber más de una configuración posible producto de la derivación de $(q_0, w, Z_0)$. Por lo tanto, $w$ y $w'$ pueden diferir en la derivación de la pila, y aceptar ambas. Entonces, no pasa lo mismo con los autómatas de pila no determinísticos.
 
 TODO: COMPLETAR/CAMBIAR ULT PARRAFO
 
@@ -444,25 +443,24 @@ Mostrar que todo lenguaje lineal sin la palabra vacía tiene una gramática dond
 **TODO: CHEQUEAR SI HAY QUE ELIMINAR LAS PRODUCCIONES CON CUERPO LAMBDA PRIMERO**
 
 Sea $w = w_1...w_n$
-* Caso $A \rightarrow w$:
 
-   * $A \rightarrow w_1A_1$
-   * $A_1 \rightarrow w_2A_2$
-   * ...
-   * $A_{n-1} \rightarrow w_n$
+- Caso $A \rightarrow w$:
+
+  - $A \rightarrow w_1A_1$
+  - $A_1 \rightarrow w_2A_2$
+  - ...
+  - $A_{n-1} \rightarrow w_n$
 
    Hace que se genere de a poco la palabra $w$, simbolo por simbolo de izquierda a derecha.
 
-* Caso $A \rightarrow aBx$:
-   * $A \rightarrow aA_1$
-   * $A1 \rightarrow A_2x_n$
-   * $A_2 \rightarrow A_3x_{n-1}$
-   * ...
-   * $A_{n-1} \rightarrow Bx_1$
+- Caso $A \rightarrow aBx$:
+  - $A \rightarrow aA_1$
+  - $A1 \rightarrow A_2x_n$
+  - $A_2 \rightarrow A_3x_{n-1}$
+  - ...
+  - $A_{n-1} \rightarrow Bx_1$
 
    Primero fija la a de la izquierda y despues va fijando de a un simbolo de derecha a izquierda la x.
-
-
 
 ## Ejercicio 24
 
