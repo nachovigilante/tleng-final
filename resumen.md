@@ -72,7 +72,7 @@ Sea $M = \langle Q, \Sigma, \delta, q_0, F \rangle$ un **AFD**. Sea $n = |Q|$. E
 
 #### Complejidad de minimizar un AFD
 
-Sea $M = \langle Q, \Sigma, \delta, q_0, F \rangle$ un **AFD**. Sea $n = |Q|$, y $s = |\Sigma|$. Entonces, el algoritmo de minimización tiene complejidad $O(ns*log(n))$ (Hopcroft), $O(n^2s)$ (Moore) o $O(2^n)$ (Brozozowski).
+Sea $M = \langle Q, \Sigma, \delta, q_0, F \rangle$ un **AFD**. Sea $n = |Q|$, y $s = |\Sigma|$. Entonces, el algoritmo de minimización tiene complejidad $O(ns*log(n))$ (Hopcroft), $O(n^2s)$ (Moore) o $O(2^n)$ (Brzozowski).
 
 TODO: completar
 

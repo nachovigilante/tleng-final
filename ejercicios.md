@@ -28,10 +28,14 @@ $\Leftarrow$) Trivial, si existe una palabra de longitud menor a $n$ entonces el
 
 $\Rightarrow$) Supongamos que no existe palabra menor a $n$. Tomo la palabra mas corta $w$, que por suposicion es mayor o igual a $n$. Sin embargo, si es mayor o igual a $n$, por el lema de pumping, puedo descomponerla en $xyz$ con $|xy| \leq n$ y $|y| \gt 0$. Por lo tanto $xy^iz \in L(M)$ para todo $i \geq 0$, mas aún $xy^0z \in L(M).$ Entonces, $xy^0z$ tiene longitud menor a $w$. Pero dijimos que $w$ era la palabra mas corta, llegamos a un absurdo.
 
-Por lo tanto para ver si el lenguaje es vacio, basta con fijarse si alguna palabra menor a $n$ esta en el lenguaje. 
+Por lo tanto para ver si el lenguaje es vacío, basta con fijarse si alguna palabra menor a $n$ esta en el lenguaje.
 
 TODO: COMPLEJIDAD
 
+la complejidad va a estar definida por:
+
+- minimizar el autómata
+- probar palabras menores a $n$?????
 
 ## Ejercicio 2
 
@@ -43,16 +47,15 @@ Es literal la demo de la cota para el árbol de derivación pero con $R$ en vez 
 
 ## Ejercicio 3
 
-Dar dos algoritmos distintos para determinar si el lenguaje aceptado por un autómata finito dado es el conjunto de todas las cadenas del alfabeto. Justificar cada uno y dar su complejidad
-algorítmica.
+Dar dos algoritmos distintos para determinar si el lenguaje aceptado por un autómata finito dado es el conjunto de todas las cadenas del alfabeto. Justificar cada uno y dar su complejidad algorítmica.
 
 ### Opción 1
 
 Sea $M = \langle Q, \Sigma, \delta, q_0, F \rangle$ un **AFD**. Construir un **AFD** $M' = \langle Q, \Sigma, \delta', q_0, F' \rangle$ que acepte $\Sigma^*$ y sea mínimo. Luego, minimizar $M'$ para obtener $M''$. Si $M''$ es isomorfo a $M$, entonces $L(M) = \Sigma^*$.
 
-Esta opción es costosa computacionalmente, ya que hay que minimizar los autómatas y chequear isomorfismo de grafos. Esto último es lo más costoso de todo.
+En cuanto a la complejidad computacional, será necesario construir un **AFD** que acepte $\Sigma^*$, lo que conlleva una complejidad muy baja además es mínimo de una (check) (capaz calcular?). Luego, minimizar $M$ tiene costo $O(ns*log(n))$ y chequear si $M$ y $M'$ son isomorfos tiene costo $O(2^n)$ (aprox).
 
-TODO: calcular complejidad computacional de peor caso.
+Complejidad total: $O(2^n + ns*log(n))$ (es muy probable que $ns*log(n) \ll 2^n$ entonces generalmente será $O(2^n)$)
 
 ### Opción 2
 
@@ -199,10 +202,11 @@ Poner en $P'$:
 - Todas las producciones $A \rightarrow a$ con $A \in V_N$ y $a \in V_T$.
 - Todas las producciones $A \rightarrow BC$ con $A, B, C \in V_N$.
 - Todas las producciones $A \rightarrow BCD$ con $A, B, C, D \in V_N$.
-- Para cada producción $A \rightarrow X_1X_2X_3$ con $X_1$, $X_2$ o $X_3$ o todas terminales, agregar una nueva producción $A' \rightarrow X_1'X_2'X_3'$.
+- Para cada producción $A \rightarrow X_1X_2X_3$ con algún $X_i$ terminal, agregar una nueva producción $A \rightarrow X_1'X_2'X_3'$.
+- Para cada producción $A \rightarrow X_1X_2$ con algún $X_i$ terminal, agregar una nueva producción $A \rightarrow X_1'X_2'$.
 - Para cada producción $A \rightarrow X_1...X_k$ con $k > 3$, $X \in (V_N \cup V_T)$, poner:
-  - $A \rightarrow X_1'\langle X_2...X_k \rangle$
-  - $\langle X_2...X_k \rangle \rightarrow X_2'\langle X_3...X_k \rangle$
+  - $A \rightarrow X_1'X_2'\langle X_3...X_k \rangle$
+  - $\langle X_3...X_k \rangle \rightarrow X_3'X_4'\langle X_5...X_k \rangle$
   - ...
   - $\langle X_{k-2}...X_k \rangle \rightarrow X_{k-2}'X_{k-1}'X_k'$
   - Si $X_i \in V_T$, entonces agregar la producción $X_i' \rightarrow X_i$.
