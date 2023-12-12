@@ -51,9 +51,9 @@ Dar dos algoritmos distintos para determinar si el lenguaje aceptado por un aut�
 
 ### Opción 1
 
-Sea $M = \langle Q, \Sigma, \delta, q_0, F \rangle$ un **AFD**. Construir un **AFD** $M' = \langle Q, \Sigma, \delta', q_0, F' \rangle$ que acepte $\Sigma^*$ y sea mínimo. Luego, minimizar $M'$ para obtener $M''$. Si $M''$ es isomorfo a $M$, entonces $L(M) = \Sigma^*$.
+Sea $M = \langle Q, \Sigma, \delta, q_0, F \rangle$ un **AF**. Construir un **AFD** $M' = \langle Q, \Sigma, \delta', q_0, F' \rangle$ que acepte $\Sigma^*$ y sea mínimo. Luego, determinizar y minimizar $M$ para obtener $M''$. Si $M'$ es isomorfo a $M''$, entonces $L(M) = \Sigma^*$.
 
-En cuanto a la complejidad computacional, será necesario construir un **AFD** que acepte $\Sigma^*$, lo que conlleva una complejidad muy baja además es mínimo de una (check) (capaz calcular?). Luego, minimizar $M$ tiene costo $O(ns*log(n))$ y chequear si $M$ y $M'$ son isomorfos tiene costo $O(2^n)$ (aprox).
+En cuanto a la complejidad computacional, será necesario construir un **AFD** que acepte $\Sigma^*$, lo que conlleva una complejidad muy baja además es mínimo de una (check) (capaz calcular?). Luego, determinizar y minimizar $M$ tiene costo $O(2^n + ns*log(n))$ y chequear si $M$ y $M'$ son isomorfos tiene costo $O(2^n)$ (aprox).
 
 Complejidad total: $O(2^n + ns*log(n))$ (es muy probable que $ns*log(n) \ll 2^n$ entonces generalmente será $O(2^n)$)
 
