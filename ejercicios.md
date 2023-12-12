@@ -282,7 +282,6 @@ Demostrar que dada una gramática regular a derecha se puede obtener una gramát
 
 ### Opción 1
 
-
 Eliminar recursión a derecha.
 
 ### Opción 2
@@ -459,6 +458,8 @@ sea un terminal o con un no-terminal $B$ donde $A < B$.
 ### Solución
 
 TODO: completar
+
+![gr](gr.png)
 
 ## Ejercicio 23
 
