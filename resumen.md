@@ -201,7 +201,7 @@ $|w| = 0 \Rightarrow w = \lambda$.
 Luego $\delta^*(q_0, w) = \delta^*(q, \lambda) = \{q\} = q_0' = \delta'^*(q_0', \lambda) = \delta'^*(q_0', w)$.
 
 *Paso inductivo:*
-|
+
 $HI$: Supongamos que $\delta^*(q_0, w) = \delta'^*(q_0', w)$ para $|w| \leq m$.
 
 Sea $w = xa$, con $|x| = m$ y $a \in \Sigma$. Entonces:
@@ -329,6 +329,39 @@ $P'$ tiene a lo sumo el doble de producciones que $P$. Es decir, el algoritmo de
 La performance de este algoritmo varía considerablemente con la elección del
 orden para la enumeración de los símbolos no terminales $A_1, A_2, ..., A_n$.
 
+### Lema orden parcial y lineal en gramática libre de contexto no recursiva a izquierda
+
+Sea $G = \langle V_N, V_T, P, S \rangle$ una gramática libre de contexto no recursiva a izquierda. Existe un orden lineal $<$ sobre $V_N$ tal que si $A \to B\alpha$ es una producción en $P$, entonces $A < B$.
+
+#### Prueba
+
+Sea $\prec$ la relación tal que $A \prec B \iff A \stackrel{+}{\Rightarrow}B\alpha$ para alguna $\alpha \in (V_N \cup V_T)^*$. Por definición de recursión a izquierda, $\prec$ es un orden parcial, es decir, es una relación transitiva (fácil de probar), irreflexiva (ya que no es recursiva a izquierda no puede pasar que $A \prec A\alpha$), y por lo tanto, asimétrica (ya que no es recursiva a izquierda no puede pasar que $A \prec B\alpha$ y $B \prec A\alpha'$), pero no es total (no necesariamente está definido si $A \prec B$ o $B \prec A$ o $A \prec B$).
+
+Sea, entonces, $D = (V_N, \prec)$ el grafo dirigido asociado a $\prec$. Como $\prec$ es un orden parcial, $D$ no tiene ciclos. Por lo tanto, $D$ es un grafo acíclico dirigido (DAG). Podemos entonces utilizar un algoritmo de ordenamiento topológico para obtener un orden lineal $<$ sobre $V_N$ tal que si $A \prec B$, entonces $A < B$.
+
 ### Algoritmo para pasar a forma normal de Chomsky
 
 ![chom](image-3.png)
+
+### Forma normal de Greibach
+
+Una gramática $G = \langle V_N, V_T, P, S \rangle$ está en forma normal de Greibach si no tiene producciones con cuerpo $\lambda$ (es propia) y toda producción en $P$ es de la forma $A \to a\alpha$ con $a \in V_T$ y $\alpha \in V_N^∗$.
+
+#### Algoritmo para pasar a forma normal de Greibach
+
+**Entrada**: $G = \langle V_N, V_T, P, S \rangle$ gramática libre de contexto, propia y no recursiva a izquierda.
+
+**Salida**: $G'$ gramática libre de contexto, en forma normal de Greibach, tal que $L(G) = L(G')$.
+
+**Procedimiento**:
+
+Construir un orden lineal de los símbolos no terminales en $V_N$, $A_1 < A_2 < ... < A_n$, tal que para cada producción $A \to \alpha$, $\alpha$ empieza con un símbolo terminal o $\alpha$ empieza con un no-terminal $B$ tal que $A < B$.
+
+Nota: usar el orden dado por el lema de orden parcial y lineal en gramática libre de contexto no recursiva a izquierda.
+
+- $i := n − 1$
+- Mientras $i > 0$ poner en $P'$
+  - Reemplazar cada producción $A_i \to A_j\alpha$ con $j > i$ por $A_i \to \beta_1\alpha|...|\beta_m\alpha$ donde $A_j \to \beta_1|...|\beta_m$ son todas las producciones con cabeza $A_j$ (por el orden que elegimos).
+  - Se cumplirá que cada uno de los $\beta_1, .., \beta_m$ empiezan con un terminal.
+  - $i := i − 1$
+- Para cada produccion $A \to aX_1...X_k$, reemplazar aquellos $X_j$ que sean terminales por un símbolo no terminal $X'_j$ nuevo, y agregar la producción $X'_j \to X_j$

@@ -505,7 +505,7 @@ Sea $w = w_1...w_n$
 
 - Caso $A \rightarrow aBx$:
   - $A \rightarrow aA_1$
-  - $A1 \rightarrow A_2x_n$
+  - $A_1 \rightarrow A_2x_n$
   - $A_2 \rightarrow A_3x_{n-1}$
   - ...
   - $A_{n-1} \rightarrow Bx_1$
@@ -544,6 +544,8 @@ A \stackrel{+}{\Rightarrow} B \alpha & \iff \exists A_{i_1}, ..., A_{i_k} \in N 
 & \implies A < B \text{ (por transitividad de $<$)}
 \end{align*}$$
 
+**Nota:** Si algo queda medio suelto mirar el lema de orden parcial y lineal en el resumen.
+
 Ahora, analicemos la ejecución del algoritmo de eliminación de recursión a izquierda al recorrer los nodos en este nuevo orden. En el $i$-ésimo paso, se consideran las producciones con cabeza $A_i$, que son de la forma:
 $$A_i \to A_i \alpha_1 \mid ... \mid A_i \alpha_k \mid A_{j_1} \beta_1 \mid ... \mid A_{j_m} \beta_m \mid a_1 \gamma_1 \mid ... \mid a_p \gamma_p$$
 
@@ -552,7 +554,7 @@ Con $\alpha, \beta, \gamma \in (V_N \cup V_T)^*$ y $j_1, ..., j_k > i$. Notemos 
 Consideremos el impacto de cada caso en el tiempo de ejecución:
 
 - Las producciones $A_i \to A_i \alpha_j$ son recursión inmediata, y por ende se deben remover por medio del algoritmo de eliminación de la misma.
-- Las producciones $A_i \to A_{i_j} \beta_j$ no necesitan ningún procesamiento. Además, es imposible que sean fuente de recursión no inmediata, ya que si $A_{i_j} \stackrel{+}{\Rightarrow} A_i \alpha$, se tendría que $A_{i_j} < A_i$ (absurdo, porque $i_j > i$).
+- Las producciones $A_i \to A_{j_k} \beta_k$ no necesitan ningún procesamiento. Además, es imposible que sean fuente de recursión no inmediata, ya que si $A_{i_j} \stackrel{+}{\Rightarrow} A_i \alpha$, se tendría que $A_{j_k} < A_i$ (absurdo, porque $j_k > i$).
 - Las producciones $A_i \to a_j \gamma_j$ tampoco necesitan ser procesadas.
 
 Por ende, el peor caso se da cuando todas las producciones son recursión inmediata ($m = p = 0$), y esto resulta en $2k$ producciones.
@@ -563,7 +565,43 @@ Como este razonamiento aplica para cada paso, si se define $P_{A_i} = \{p \in P 
 
 Bajo esta interpretación el razomamiento es muy parecido. Con la salvedad de que ahora la relación de derivación no es antisimétrica, y por ende no se puede tomar un ordenamiento topológico de los nodos de $G$. Sin embargo, se puede tomar un ordenamiento topológico de los nodos de $G/\mathrm{\sim}$, donde $\mathrm{\sim}$ es la relación de equivalencia dada por $A \sim B \iff A \stackrel{+}{\Rightarrow} B\alpha \land B \stackrel{+}{\Rightarrow} A\beta$.
 
-TODO: terminar
+Ahora, debemos separar el análisis en dos partes:
+
+- Procesar las producciones dentro de cada clase de equivalencia en un orden arbitrario
+- Procesar las producciones utilizando un representante de cada clase de equivalencia
+
+Parte 1:
+
+Por cada clase de equivalencia debemos numerar los símbolos no terminales de forma arbitraria, y luego procesar las producciones en el orden dado por esta numeración de la siguiente manera. En el $i$-ésimo paso, se consideran las producciones con cabeza $A_i$, que son de la forma:
+
+$$A_i \to A_i \alpha_1 \mid ... \mid A_i \alpha_k \mid A_{j_1} \beta_1 \mid ... \mid A_{j_m} \beta_m \mid a_1 \gamma_1 \mid ... \mid a_p \gamma_p$$
+
+- Las producciones $A_i \to A_i \alpha_j$ son recursión inmediata, y por ende se deben remover por medio del algoritmo de eliminación de la misma.
+- Las producciones $A_i \to A_{j_k} \beta_k$ pueden ser fuente de recursión no inmediata, ya que si $A_{i_j} \stackrel{+}{\Rightarrow} A_i \alpha$, se tendría que $A_{j_k} \sim A_i$. Entonces
+  - Si $A_{j_k} \sim A_i$, se debe reemplazar la producción $A_i \to A_{j_k} \beta_k$ por $A_i \to \delta_1\beta_k|...|\delta_m\beta_k$ donde $A_{j_k} \to \delta_1|...|\delta_m$ son las producciones de cabeza $A_{j_k}$.
+  - Si $A_{j_k} \not\sim A_i$, no se debe hacer nada, puesto que no hay recursión no inmediata.
+- Las producciones $A_i \to a_j \gamma_j$ tampoco necesitan ser procesadas.
+
+Haciendo un análisis similar al del algoritmo de eliminación de recursión a izquierda común, en el peor caso tenemos que dentro de una clase de equivalencia:
+
+- Todas las producciones de $G$ con cabeza $A_1$ tienen recursión inmediata. Con la transformación pasan a ser $2c$ producciones con cabeza $A_1$.
+- Todas las producciones de $G$ con cabeza $A_2$ tienen un cuerpo que empieza con $A_2$. Con la transformación pasan a ser $2(2c)c = 2^2c^2$ producciones con cabeza $A_2$.
+- ...
+- Todas las producciones de $G$ con cabeza $A_n$ tienen un cuerpo que empieza con $A_{n-1}$. Con la transformación pasan a ser $(2c)^{2^n}$ producciones con cabeza $A_2$.
+
+Parte 2:
+
+- Las producciones $A_i \to A_i \alpha_j$ son recursión inmediata, y por ende se deben remover por medio del algoritmo de eliminación de la misma.
+- Las producciones $A_i \to A_{j_k} \beta_k$ no necesitan ningún procesamiento. Además, es imposible que sean fuente de recursión no inmediata, ya que si $A_{i_j} \stackrel{+}{\Rightarrow} A_i \alpha$, se tendría que $A_{j_k} \sim A_i$ (absurdo, porque elegimos un representante de cada clase de equivalencia).
+- Las producciones $A_i \to a_j \gamma_j$ tampoco necesitan ser procesadas.
+
+Por ende, el peor caso se da cuando todas las producciones son recursión inmediata ($m = p = 0$), y esto resulta en $2k$ producciones.
+
+Como este razonamiento aplica para cada paso, si se define $P_{A_i} = \{p \in P \mid p \text{ tiene como cabeza } A_i\}$, la cantidad de producciones totales en el peor caso es $\sum_{i = 1}^n 2|P_{A_i}| = 2|P|$. Es decir, esta parte del algoritmo es **lineal** en la cantidad de producciones.
+
+Finalmente, sea $M$ el máximo cardinal de una clase de equivalencia. Entonces, la primera parte del algoritmo es **exponencial** en $M$, y la segunda parte es **lineal** en $|P|$. Por ende, el algoritmo es **exponencial** en $M$.
+
+TODO: retocar
 
 ## Ejercicio 25
 
