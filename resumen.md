@@ -66,13 +66,21 @@ en otras palabras, el número de estados es como máximo el doble del tamaño de
 
 Para el número de transiciones, se aplica un argumento aún más simple: de cada estado salen como máximo dos flechas, por lo que el número de transiciones es como máximo el doble del número de estados.
 
-#### Complejidad de determinizar un AFD
+#### Complejidad de determinizar un AFND
 
 Sea $M = \langle Q, \Sigma, \delta, q_0, F \rangle$ un **AFD**. Sea $n = |Q|$. Entonces, el algoritmo de determinización tiene complejidad $O(2^n)$.
 
 #### Complejidad de minimizar un AFD
 
 Sea $M = \langle Q, \Sigma, \delta, q_0, F \rangle$ un **AFD**. Sea $n = |Q|$, y $s = |\Sigma|$. Entonces, el algoritmo de minimización tiene complejidad $O(ns*log(n))$ (Hopcroft), $O(n^2s)$ (Moore) o $O(2^n)$ (Brzozowski).
+
+#### Complejidad de obtener el complemento de un AFD
+
+Sea $M = \langle Q, \Sigma, \delta, q_0, F \rangle$ un **AFD**. Sea $n = |Q|$. Entonces, el algoritmo de obtener el complemento tiene complejidad $O(n)$.
+
+#### Complejidad de obtener el reverso de un AFD
+
+Sea $M = \langle Q, \Sigma, \delta, q_0, F \rangle$ un **AFD**. Sea $n = |Q|$ y sea $s = |\Sigma|$. La cantidad de transiciones de $M$ en el peor caso es $O(ns)$. Entonces el algoritmo de obtener el reverso tiene complejidad $O(ns)$.
 
 TODO: completar
 
