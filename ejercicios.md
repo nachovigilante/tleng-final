@@ -22,9 +22,16 @@ Por un análisis similar, la complejidad temporal de este algoritmo es $O(max\{2
 
 ### Opción 2 bis
 
-Podemos utilizar el lema de pumping para decidir si un lenguaje es vacío ?????.
+Podemos utilizar el lema de pumping para decidir si un lenguaje es vacío. $L(M) \neq \varnothing \iff \exists w \in L(M) \wedge |w| \lt n$.
 
-TODO: completar
+$\Leftarrow$) Trivial, si existe una palabra de longitud menor a $n$ entonces el lenguaje no es vacío.
+
+$\Rightarrow$) Supongamos que no existe palabra menor a $n$. Tomo la palabra mas corta $w$, que por suposicion es mayor o igual a $n$. Sin embargo, si es mayor o igual a $n$, por el lema de pumping, puedo descomponerla en $xyz$ con $|xy| \leq n$ y $|y| \gt 0$. Por lo tanto $xy^iz \in L(M)$ para todo $i \geq 0$, mas aún $xy^0z \in L(M).$ Entonces, $xy^0z$ tiene longitud menor a $w$. Pero dijimos que $w$ era la palabra mas corta, llegamos a un absurdo.
+
+Por lo tanto para ver si el lenguaje es vacio, basta con fijarse si alguna palabra menor a $n$ esta en el lenguaje. 
+
+TODO: COMPLEJIDAD
+
 
 ## Ejercicio 2
 
@@ -325,8 +332,6 @@ Construimos un autómata de pila vacía  $P' = \langle Q \cup \{q0', qf\}, \Sigm
 - $\forall f \in F, \forall z \in \Gamma \cup \{X_0\}: \delta'(f, \lambda, \lambda, z) = \{(q_f, \lambda)\}$ que agregamos que los finales vayan al nuevo estado.
 - $\forall z \in \Gamma \cup \{X_0\}: \delta'(q_f, \lambda, \lambda, z) = \{(q_f, \lambda)\}$ que desapila.
 
-<!-- L(M) ⊆ L(M’): si x ∈ L(M) entonces (q0, w, x, Z0) |- (f, λ, λ, γ) que entonces (q0, w, x, Z0X0) |- (f, λ, λ, γX0) porque solo le agregue abajo de todo algo en la pila. Por definición de M’ (q0’, w, x, X0) |- (q0, w, x, Z0X0) |- (f, λ, λ, γX0) |- (qλ, λ, λ, λ) que significa que x ∈ L(M’) 
- L(M’) ⊆ L(M): si x ∈ L(M’) entonces (q0’, w, x, X0) |- (q0, w, x, Z0X0) |- (f, λ, λ, γX0) |- (qλ, λ, λ, λ) pero si (q0, w, x, Z0X0) |- (f, λ, λ, γX0) significa que x ∈ L(M). -->
 
 Correctitud:
 
@@ -493,7 +498,7 @@ Pasos a seguir:
 - Determinizar $M'$, $M''$.
 - Obtener el reverso de $M''$, $M'''$.
 
-Esto es correcto porque si en el autómata $M'''$ sucede que $\exists q_1, q_2, q_3 \in Q, a \in \Sigma / q_1 \in \delta(q_2, a) ∧ q_1 \in (q_3, a)$ (no es codeterminístico) entonces, como $M''$ es el reverso de $M'''$, pasa que $\exists q_1, q_2, q_3 \in Q, a \in \Sigma / q_1 \in \delta(q_2, a) ∧ q_1 \in (q_3, a)$ (no es determinístico). Pero esto es absurdo, ya que $M''$ es determinístico por definición.
+Esto es correcto porque si en el autómata $M'''$ sucede que $\exists q_1, q_2, q_3 \in Q, a \in \Sigma / q_1 \in \delta(q_2, a) ∧ q_1 \in (q_3, a)$ (no es codeterminístico) entonces, como $M''$ es el reverso de $M'''$, pasa que $\exists q_1, q_2, q_3 \in Q, a \in \Sigma / q_2 \in \delta(q_1, a) ∧ q_3 \in (q_1, a)$ (no es determinístico). Pero esto es absurdo, ya que $M''$ es determinístico por definición.
 
 ## Ejercicio 27
 
