@@ -230,7 +230,7 @@ Consideremos el transductor finito dado por una máquina de Mealy $\langle S, \S
 
 Adaptar el algoritmo de minimizacion de autómatas finitos a una minimización de maquina Mealy.
 
-**Ayuda**: Definir la relación de equivalencia considerando la función \delta extendida y la función gamma
+**Ayuda**: Definir la relación de equivalencia considerando la función $\delta$ extendida y la función gamma
 extendida.
 
 ### Solución
@@ -246,14 +246,14 @@ $$\land\ \ \hat{\gamma}(q, \alpha) = \hat{\gamma}(r, \alpha)$$
 Dos estados $q, r \in Q$ son k-indistinguibles, cuando son indistinguibles y en los $\alpha$ tal que $|\alpha| \leq k$
 
 Redefinimos la relacion de equivalencia a:
-* $q \equiv_{k+1} r \iff q \equiv_{k} r \ \land \forall \alpha \in \Sigma,\ \delta(q,\alpha) \equiv_{k} \delta(r,\alpha) \land \gamma(q,\alpha) = \gamma(r,\alpha)$
 
-* $q \equiv_0 r \iff \forall \alpha \in \Sigma,\  \gamma(q,\alpha) = \gamma(r,\alpha)$
+- $q \equiv_{k+1} r \iff q \equiv_{k} r \ \land \forall \alpha \in \Sigma,\ \delta(q,\alpha) \equiv_{k} \delta(r,\alpha) \land \gamma(q,\alpha) = \gamma(r,\alpha)$
 
+- $q \equiv_0 r \iff \forall \alpha \in \Sigma,\  \gamma(q,\alpha) = \gamma(r,\alpha)$
 
 Asi dos estados son indistinguibles si van a estados indistinguibles y generan la misma salida.
 
-Luego, el algoritmo de minimizacion es el mismo.
+Luego, el algoritmo de minimización es el mismo.
 
 ## Ejercicio 10
 
