@@ -412,6 +412,7 @@ Dar un algoritmo que transforma una gramatica $LL(k)$ en otra $LL(k)$ de la form
 
 ### Solución
 
+Pasar a forma normal de Greibrach???
 TODO: completar
 
 ## Ejercicio 19
@@ -426,7 +427,25 @@ Contar la cantidad de árboles de derivacion más a la izquierda de $a^n$.
 
 ### Solución
 
-TODO: completar
+Analisis rapido con los primeros $n$:
+* $n=1: S \Rightarrow a$
+* $n=2: S \Rightarrow SS \Rightarrow aS \Rightarrow aa$
+* $n=3:$
+   * $ S \Rightarrow SS \Rightarrow aS \Rightarrow aSS \Rightarrow aaS \Rightarrow aaa$
+   * $ S \Rightarrow SS \Rightarrow SSS \Rightarrow aSS \Rightarrow aaS \Rightarrow aaa$
+
+Ahora si, hago induccion en $n$:
+* Casos bases:
+   * $n=1$: $X_1 = 1$
+   * $n=2$: $X_2 = comb(2,1)/2 = 1$ o la sumatoria tambien da 1 siendo $i=1$ y $j=1$ los unicos valores de la sumatoria posibles.
+   * $n=3$: $X_3 = comb(4,2)/3 = 2$ o la sumatoria queda:
+   $X_1X_2 + X_2X_1 = 1 + 1 = 2$
+
+* Paso inductivo: 
+
+   TODO: COMPLETARLO, la idea intuitiva de la sumatoria es:
+   * Todas las formas de crear una gramatica con $n \ a$'s es meter $n \ S$'s 
+   * Si quiero meter $n \ S$'s tengo que hacer $S \Rightarrow S_1S_2$. Donde $S_1$ puede formar las primeras $i \ a$'s y $S_2$ puede formar las $n-i$ restantes.
 
 ## Ejercicio 20
 
