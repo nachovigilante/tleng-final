@@ -267,12 +267,12 @@ Luego, el algoritmo de minimización es el mismo.
 
 1. TODO: completar
 
-
-2. Contraejemplo: 
+2. Contraejemplo:
 
    ![D](image-4.png)
 
    Se ve que no es co-deterministico porque $q_2$ recibe $c$ de $q_1$ y $q_3$. Pero si es minimo porque todos los estados son distinguibles (se puede ver facil con distintas cadenas  que llevan a un final desde ese estado y no del resto).
+
 ## Ejercicio 11
 
 Demostrar que dada una gramática regular a derecha se puede obtener una gramática regular a izquierda equivalente.
