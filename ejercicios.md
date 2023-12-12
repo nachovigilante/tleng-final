@@ -243,7 +243,17 @@ $$\forall\alpha\in\Sigma^∗,\ \hat{\delta}(q, \alpha) \in F \iff \hat{\delta}(r
 
 $$\land\ \ \hat{\gamma}(q, \alpha) = \hat{\gamma}(r, \alpha)$$
 
-TODO: completar
+Dos estados $q, r \in Q$ son k-indistinguibles, cuando son indistinguibles y en los $\alpha$ tal que $|\alpha| \leq k$
+
+Redefinimos la relacion de equivalencia a:
+* $q \equiv_{k+1} r \iff q \equiv_{k} r \ \land \forall \alpha \in \Sigma,\ \delta(q,\alpha) \equiv_{k} \delta(r,\alpha) \land \gamma(q,\alpha) = \gamma(r,\alpha)$
+
+* $q \equiv_0 r \iff \forall \alpha \in \Sigma,\  \gamma(q,\alpha) = \gamma(r,\alpha)$
+
+
+Asi dos estados son indistinguibles si van a estados indistinguibles y generan la misma salida.
+
+Luego, el algoritmo de minimizacion es el mismo.
 
 ## Ejercicio 10
 
