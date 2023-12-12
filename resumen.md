@@ -84,6 +84,80 @@ Sea $M = \langle Q, \Sigma, \delta, q_0, F \rangle$ un **AFD**. Sea $n = |Q|$ y 
 
 TODO: completar
 
+### Propiedades de clausura de lenguajes libres de contexto
+
+Página 144 de Hopcroft.
+
+### Algoritmos de decision lenguajes libres de contexto
+
+Existen algoritmos de decisión para las siguientes propiedades de lenguajes libres de contexto:
+
+- Es vacío
+- Es finito
+- Es infinito
+
+Página 147 de Hopcroft.
+
+### Propiedades de clausura de lenguajes libres de contexto determinísticos
+
+Los lenguajes libres de contexto determinísticos **NO** son cerrados bajo:
+
+- Homomorfismo
+- Unión
+- Intersección
+- Concatenación
+- Clausura de Kleene
+
+Los lenguajes libres de contexto determinísticos **SI** son cerrados bajo:
+
+- Homomorfismo inverso
+- Complemento
+- Intersección con un lenguaje regular
+- Min
+- Max
+
+La prueba de intersección y homomorfismo inverso es igual a la de los lenguajes libres de contexto.
+
+#### Min y Max
+
+Sea $M = \langle Q_M, \Sigma, \Gamma, \delta_M, q_0, Z_0, F_M \rangle$ un autómata de pila determinístico que acepta $L$ y siempre lee todo el input. Si modificamos $M$ de tal manera que los estados finales no tienen transiciones de salida, entonces este nuevo autómata de pila determinístico acepta $Min(L)$.
+
+TODO: pasar
+
+![Alt text](image-6.png)
+
+#### Complemento
+
+Página 248 de Hopcroft.
+
+### Algoritmos de decisión lenguajes libres de contexto determinísticos
+
+Sea $L$ un lenguaje libre de contexto determinístico y sea $R$ un lenguaje regular.
+
+#### Igualdad con un lenguaje regular
+
+$L=R \iff (L \cap \overline{R}) \cup (\overline{L} \cap R) = \varnothing$. Como los lenguajes libres de contexto determinísticos son cerrados bajo complementación e intersección con lengujes regulares, como los lengujes libres de contexto son cerrados bajo unión y la igualdad de un lenguaje libre de contexto con el vacío es decidible, entonces la igualdad de un lenguaje libre de contexto determinístico con un lenguaje regular es decidible.
+
+#### Inclusión en un lenguaje regular
+
+$R \subseteq L \iff \overline{L} \cap R = \varnothing$. Como $\overline{L} \cap R$ es un lenguaje libre de contexto, entonces $\overline{L} \cap R = \varnothing$ es decidible.
+
+#### Complemento vacío
+
+Como los lenguajes libres de contexto determinísticos son cerrados bajo complementación, entonces $\overline{L} = \varnothing$ es decidible.
+
+#### Complemento es libre de contexto
+
+Como los lenguajes libres de contexto determinísticos son cerrados bajo complementación, entonces $\overline{L}$ es libre de contexto.
+
+#### Es regular
+
+Es decidible. La prueba es larga y está en otros libros.
+
+### Propiedades indecidibles de lenguajes libres de contexto determinísticos
+
+![Alt text](image-5.png)
+
 ## Teoremas y algoritmos
 
 ### Lema de pumping para lenguajes regulares
