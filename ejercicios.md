@@ -53,15 +53,15 @@ Dar dos algoritmos distintos para determinar si el lenguaje aceptado por un aut�
 
 Sea $M = \langle Q, \Sigma, \delta, q_0, F \rangle$ un **AF**. Construir un **AFD** $M' = \langle Q, \Sigma, \delta', q_0, F' \rangle$ que acepte $\Sigma^*$ y sea mínimo. Luego, determinizar y minimizar $M$ para obtener $M''$. Si $M'$ es isomorfo a $M''$, entonces $L(M) = \Sigma^*$.
 
-En cuanto a la complejidad computacional, será necesario construir un **AFD** que acepte $\Sigma^*$, lo que conlleva una complejidad muy baja además es mínimo de una (check) (capaz calcular?). Luego, determinizar y minimizar $M$ tiene costo $O(2^n + ns*log(n))$ y chequear si $M$ y $M'$ son isomorfos tiene costo $O(2^n)$ (aprox).
+En cuanto a la complejidad computacional, será necesario construir un **AFD** que acepte $\Sigma^*$, lo que conlleva una complejidad muy baja además es mínimo de una (check) (capaz calcular?). Luego, determinizar y minimizar $M$ tiene costo $O(2^n)$ y chequear si $M$ y $M'$ son isomorfos tiene costo $O(2^n)$ (aprox).
 
-Complejidad total: $O(2^n + ns*log(n))$ (es muy probable que $ns*log(n) \ll 2^n$ entonces generalmente será $O(2^n)$)
+Complejidad total: $O(2^n)$
 
 ### Opción 2
 
-Sea $M = \langle Q, \Sigma, \delta, q_0, F \rangle$ un **AFD**. Construir el complemento de $M$, $M'$. Luego, si $M'$ es vacío, entonces $L(M) = \Sigma^*$.
+Sea $M = \langle Q, \Sigma, \delta, q_0, F \rangle$ un **AF**. Determinizarlo, obteniendo $M'$ y construir el complemento de $M'$, $M''$. Luego, si $M''$ es vacío, entonces $L(M) = \Sigma^*$.
 
-TODO: completar
+En cuanto a la complejidad computacional, será necesario determinizar $M$, lo que conlleva una complejidad de $O(2^n)$. Luego, construir el complemento de $M'$ tiene una complejidad de $O(n)$. Finalmente, chequear si $M''$ es vacío tiene una complejidad de $O(ns)$ (es DFS en el grafo).
 
 ## Ejercicio 4
 
@@ -71,7 +71,10 @@ Dar un algoritmo que determine si un lenguaje regular dado es infinito. Justific
 
 Armo un **AFND-$\lambda$** $M$ que acepte el lenguaje. Luego busco un ciclo en el grafo de $M$ utilizando DFS. Si encuentro un ciclo y no todas las transiciones son $\lambda$, entonces el lenguaje es infinito. Si no encuentro un ciclo, entonces el lenguaje es finito.
 
-TODO: calcular complejidad computacional de peor caso.
+Si asumimos que nos dan como entrada una expresión regular, entonces la complejidad temporal del algoritmo depende de:
+
+- Construir el **AFND-$\lambda$** $M$ a partir de la expresión regular. Esto tiene una complejidad de $O(|r|)$.
+- Buscar un ciclo en el grafo de $M$ utilizando DFS. Esto tiene una complejidad de $O(ns)$.
 
 ### Opción 2
 
@@ -266,7 +269,9 @@ Luego, el algoritmo de minimización es el mismo.
 ### Solución
 
 1. TODO: completar
-2. TODO: completar
+2. Contraejemplo:
+
+   ![contra](image-4.png)
 
 ## Ejercicio 11
 
