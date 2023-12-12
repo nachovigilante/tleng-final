@@ -520,7 +520,50 @@ Dar la complejiiad del algoritmo de eliminación de la recursión a izquierda qu
 
 ### Solución
 
-TODO: completar
+**Aclaración importante:** este ejercicio tiene un problema de interpretación importante, doy la solución para ambas interpretaciones mientras espero respuesta de Vero.
+
+Cuando se dice que la relación de derivación induce un orden parcial, esto, a priori, no parece ser totalmente correcto. Un orden parcial, por definición es antisimétrico, mientras que la relación de derivación puede llevar a situaciones donde $\exists A, B \in V_N$ tales que $A \stackrel{+}{\Rightarrow} B\alpha$ y $B \stackrel{+}{\Rightarrow} A\beta$. Por lo tanto, la relación de derivación no es antisimétrica, y no puede inducir un orden parcial. Una interpretación posible es que lo que se quiso decir es que la relación de derivación induce un preorden, es decir, una relación reflexiva y transitiva (pero no necesariamente antisimétrica).
+
+**Interpretación 1**: la relación de derivación induce un orden parcial (por alguna razón que no soy capaz de ver, no pasa que $\exists A, B \in V_N$ tales que $A \stackrel{+}{\Rightarrow} B\alpha$ y $B \stackrel{+}{\Rightarrow} A\beta$).
+
+Bajo esta interpretación, el orden lineal de los símbolos en $V_N$ es el siguiente:
+
+Sea $\prec \ \subseteq V_N \times V_N$ la relación dada por $A \prec B \iff A \to B \alpha$ para algún $\alpha$, y sea $G = (N, \mathrm{\prec})$ el digrafo representado por esta relación. Luego, la relación dada por $A \stackrel{+}{\Rightarrow} B \alpha$ es la clausura transitiva de $\mathrm{\prec}$, y por ende es la relación de "alcanzabilidad" en $G$, es decir, si $A \stackrel{+}{\Rightarrow} B \alpha$, entonces $B$ es alcanzable desde $A$ en $G$.
+
+Si $A \stackrel{+}{\Rightarrow} B \alpha$ es un orden parcial, $G$ es acíclico (excepto por loops de longitud 1), porque si existiera un ciclo $A_1, ..., A_k, A_1$ con $k \geq 2$, se tendría que $A_2$ es alcanzable desde $A_1$ y viceversa, lo cual es equivalente a que $A_1 \stackrel{+}{\Rightarrow} A_2 \alpha$ y $A_2 \stackrel{+}{\Rightarrow} A_1 \alpha'$, y esto implicaría (por antisimetría) que $A_1 = A_2$ (absurdo).
+
+Como $G$ es acíclico, se puede tomar un **ordenamiento topológico** de sus nodos. Este es un orden lineal $<$ de sus nodos (que representan los símbolos no terminales) que cumple que, para todo $A, B \in V_N$:
+
+$$A \prec B \implies A < B$$
+
+Es decir, $\prec\ \subseteq\ \lt$. Además, el nuevo orden también respeta la clausura transitiva, ya que:
+
+$$\begin{align*}
+A \stackrel{+}{\Rightarrow} B \alpha & \iff \exists A_{i_1}, ..., A_{i_k} \in N \mid A \prec A_{i_1} \land (A_{i_j} \prec A_{i_{j + 1}} \forall j \in \{1, ..., k - 1\}) \land A_{i_k} \prec B \\
+& \implies \exists A_{i_1}, ..., A_{i_k} \in N \mid A < A_{i_1} \land (A_{i_j} < A_{i_{j + 1}} \forall j \in \{1, ..., k - 1\}) \land A_{i_k} < B \\
+& \implies A < B \text{ (por transitividad de $<$)}
+\end{align*}$$
+
+Ahora, analicemos la ejecución del algoritmo de eliminación de recursión a izquierda al recorrer los nodos en este nuevo orden. En el $i$-ésimo paso, se consideran las producciones con cabeza $A_i$, que son de la forma:
+$$A_i \to A_i \alpha_1 \mid ... \mid A_i \alpha_k \mid A_{j_1} \beta_1 \mid ... \mid A_{j_m} \beta_m \mid a_1 \gamma_1 \mid ... \mid a_p \gamma_p$$
+
+Con $\alpha, \beta, \gamma \in (V_N \cup V_T)^*$ y $j_1, ..., j_k > i$. Notemos que no se pueden tener producciones de la forma $A_i \to A_j \alpha$ con $j < i$, ya que esto implicaría que $A_i \prec A_j$, y por ende $A_i < A_j$ (**absurdo**, porque $j < i$).
+
+Consideremos el impacto de cada caso en el tiempo de ejecución:
+
+- Las producciones $A_i \to A_i \alpha_j$ son recursión inmediata, y por ende se deben remover por medio del algoritmo de eliminación de la misma.
+- Las producciones $A_i \to A_{i_j} \beta_j$ no necesitan ningún procesamiento. Además, es imposible que sean fuente de recursión no inmediata, ya que si $A_{i_j} \stackrel{+}{\Rightarrow} A_i \alpha$, se tendría que $A_{i_j} < A_i$ (absurdo, porque $i_j > i$).
+- Las producciones $A_i \to a_j \gamma_j$ tampoco necesitan ser procesadas.
+
+Por ende, el peor caso se da cuando todas las producciones son recursión inmediata ($m = p = 0$), y esto resulta en $2k$ producciones.
+
+Como este razonamiento aplica para cada paso, si se define $P_{A_i} = \{p \in P \mid p \text{ tiene como cabeza } A_i\}$, la cantidad de producciones totales en el peor caso es $\sum_{i = 1}^n 2|P_{A_i}| = 2|P|$. Es decir, el algoritmo es **lineal** en la cantidad de producciones.
+
+**Interpretación 2**: la relación de derivación induce un preorden.
+
+Bajo esta interpretación el razomamiento es muy parecido. Con la salvedad de que ahora la relación de derivación no es antisimétrica, y por ende no se puede tomar un ordenamiento topológico de los nodos de $G$. Sin embargo, se puede tomar un ordenamiento topológico de los nodos de $G/\mathrm{\sim}$, donde $\mathrm{\sim}$ es la relación de equivalencia dada por $A \sim B \iff A \stackrel{+}{\Rightarrow} B\alpha \land B \stackrel{+}{\Rightarrow} A\beta$.
+
+TODO: terminar
 
 ## Ejercicio 25
 
