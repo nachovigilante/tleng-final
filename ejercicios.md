@@ -14,7 +14,7 @@ Complejidad total: $O(max\{2^{|r_1|}, 2^{|r_2|}\})$
 
 ### Opción 2
 
-Sea $r_1$ y $r_2$ dos expresiones regulares. Construir un **AFND** $M_1$ que acepte $L(r_1)$, y un **AFND** $M_2$ que acepte $L(r_2)$. Luego, determinizar $M_1$ y $M_2$ para obtener $M_1'$ y $M_2'$, respectivamente. Luego, obtener el complemento de $M_1'$, $M_1''$, y el complemento de $M_2'$, $M_2''$. Ahora, utilizando operaciones sobre autómatas, obtener el autómata $M_3$ que acepte $L(r_1) \triangle L(r_2)$, es decir, la diferencia simétrica de los lenguajes (ésta se puede obtener como $(L(r_1) \cup L(r_2)) \cap ((L(r_1))^c \cap (L(r_2))^c)$). Finalmente, determinizar $M_3$ para obtener $M_3'$, y chequear si $M_3'$ es vacío. Si es vacío, entonces $L(r_1) = L(r_2)$.
+Sea $r_1$ y $r_2$ dos expresiones regulares. Construir un **AFND** $M_1$ que acepte $L(r_1)$, y un **AFND** $M_2$ que acepte $L(r_2)$. Luego, determinizar $M_1$ y $M_2$ para obtener $M_1'$ y $M_2'$, respectivamente. Luego, obtener el complemento de $M_1'$, $M_1''$, y el complemento de $M_2'$, $M_2''$. Ahora, utilizando operaciones sobre autómatas, obtener el autómata $M_3$ que acepte $L(r_1) \triangle L(r_2)$, es decir, la diferencia simétrica de los lenguajes (ésta se puede obtener como $(L(r_1) \cap L(r_2)) \cup ((L(r_1))^c \cap (L(r_2))^c)$). Finalmente, determinizar $M_3$ para obtener $M_3'$, y chequear si $M_3'$ es vacío. Si es vacío, entonces $L(r_1) = L(r_2)$.
 
 Para chequear si $M_3'$ es vacío, se puede utilizar el algoritmo de búsqueda en profundidad (DFS) para recorrer el grafo del autómata. Si se llega a un estado final, entonces el autómata no es vacío. Si se recorren todos los estados y no se llega a un estado final, entonces el autómata es vacío.
 
@@ -382,10 +382,10 @@ Dado un automata de pila $P$ determinístico dar el autómata de pila no determi
 
 Los pasos a seguir son los siguientes:
 
-1. Obtener el reverso de $P'$, $P''$. En este paso tengo un lenguaje libre de contexto no determinístico.
-2. Concatenar $P$ y $P''$ para obtener $P'''$. Los lenguajes libres de contexto son cerrados bajo concatenación.
+1. Obtener el reverso de $P$, $P'$. En este paso tengo un lenguaje libre de contexto no determinístico.
+2. Concatenar $P$ y $P'$ para obtener $P''$. Los lenguajes libres de contexto son cerrados bajo concatenación.
 
-Luego, $P'''$ acepta $L'$.
+Luego, $P''$ acepta $L'$.
 
 ## Ejercicio 15
 
@@ -425,7 +425,7 @@ Dar un algoritmo que transforma una gramatica $LL(k)$ en otra $LL(k)$ de la form
 
 ### Solución
 
-Esto es casi el mismo algoritmo para pasar una gramatica a forma normal de Greibach, solo que esta forma si permite producciones con cuerpo $\lambda$. Funciona porque como es $LL(k)$ no hay recursión a izquierda. Tratamos al $\lambda$ como un terminal más.
+Esto es casi el mismo algoritmo para pasar una gramatica a forma normal de 1|bach, solo que esta forma si permite producciones con cuerpo $\lambda$. Funciona porque como es $LL(k)$ no hay recursión a izquierda. Tratamos al $\lambda$ como un terminal más.
 
 ## Ejercicio 19
 
