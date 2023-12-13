@@ -286,6 +286,29 @@ $L(M_1) = L(r_1) y L(M_2) = L(r_2)$.
   
   Dado que $r_1^+ = r_1r_1^*$, queda demostrado por los casos anteriores.
 
+### Equivalencia gramática regular y AFD
+
+#### Teorema
+
+Si $G$ es una gramática regular, entonces existe un **AFD** $M$ tal que $L(G) = L(M)$.
+
+#### Prueba
+
+Sea $G = \langle V_N, V_T, P, S \rangle$ una gramática regular a derecha. Construiremos un **AFND-$\lambda$** $M = \langle Q, V_T, \delta, [S], {[\lambda]} \rangle$ que simula derivaciones en $G$.
+
+Definamos $Q = \{[\alpha] \mid \alpha \text{ es un sufijo del cuerpo de una producción en } P \text{, o } \alpha = S\}$.
+
+Definamos $\delta$ de la siguiente manera:
+
+1. Si $A \in V_N$, entonces $\delta([A], \lambda)=\{[\alpha] \mid A \to \alpha \in P\}$
+2. Si $a \in V_T$ y $\alpha \in V_T^* \cup V_T^*V_N$, entonces $\delta([a\alpha], a)=\{[\alpha]\}$
+
+Luego, podemos demostrar por inducción en el largo de la derivación que $[\alpha] \in \delta^*([S], w)$ si y solo si $S \stackrel{*}{\Rightarrow} xA \Rightarrow xy\alpha$, donde $A \to y\alpha \in P$ y $w = xy$, o si $\alpha = S$ y $w = \lambda$. (no lo voy a escribir pero debería ser fácil)
+
+Como $[\lambda]$ es el único estado final, $M$ acepta $w$ si y solo si $S \stackrel{*}{\Rightarrow} xA \Rightarrow w$. Pero como cada derivación de un no-terminal tiene al menos un paso, $M$ acepta $w$ si y solo si $G$ genera $w$.
+
+Para las gramáticas regulares a izquierda, podes revertirla y te queda una gramática regular a derecha. Como la gramática regular a derecha que obtuviste tiene un **AFND-$\lambda$** asociado, podes despues revertir el **AFND-$\lambda$** y te queda uno asociado a la gramática regular a izquierda original.
+
 ### Cota para arbol de derivacion en gramática libre de contexto
 
 Página 314 de Aho.

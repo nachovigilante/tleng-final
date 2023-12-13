@@ -286,8 +286,6 @@ Eliminar recursión a derecha.
 
 ### Opción 2
 
-Armamos un **AFD** $M$ que acepte el lenguaje. Y ...
-
 TODO: completar
 
 ## Ejercicio 12
