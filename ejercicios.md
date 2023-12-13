@@ -286,7 +286,7 @@ Eliminar recursión a derecha.
 
 ### Opción 2
 
-TODO: completar
+Opcional: completar
 
 ## Ejercicio 12
 
