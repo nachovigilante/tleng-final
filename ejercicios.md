@@ -410,9 +410,7 @@ Dar un algoritmo que transforma una gramatica $LL(k)$ en otra $LL(k)$ de la form
 
 ### Solución
 
-Pasar a forma normal de Greibrach??? Me parece que si
-
-TODO: completar
+Esto es casi el mismo algoritmo para pasar una gramatica a forma normal de Greibach, solo que esta forma si permite producciones con cuerpo $\lambda$. Funciona porque como es $LL(k)$ no hay recursión a izquierda. Tratamos al $\lambda$ como un terminal más.
 
 ## Ejercicio 19
 
@@ -463,6 +461,8 @@ Dar un algoritmo que transforme cada gramática libre de contexto $G$ sin produc
 
 ### Solución
 
+- Pasar a forma normal de Greibach
+
 TODO: completar
 
 ## Ejercicio 22
@@ -476,9 +476,7 @@ sea un terminal o con un no-terminal $B$ donde $A < B$.
 
 ### Solución
 
-TODO: completar
-
-![gr](gr.png)
+Algoritmo para pasar a forma normal de Greibach, está en el resumen.
 
 ## Ejercicio 23
 
