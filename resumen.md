@@ -38,7 +38,7 @@ Sea $M = \langle Q, \Sigma, \Gamma, \delta, q_0, Z_0, F \rangle$ un **AP**.
 
 - Cantidad de $q_0$ posibles: $|Q|$
 - Cantidad de $F$ posibles: $2^{|Q|}$ ($\mathcal{P}(Q)$)
-- Cantidad de $\delta$ posibles: $2^{|Q|^2*(|\Sigma|+1)*|\Gamma|*|\Gamma^*|}$ ($\delta : Q \times (\Sigma \cup \{\lambda\}) \times \Gamma \rightarrow \mathcal{P}(Q \times \Gamma^*)$)
+- Cantidad de $\delta$ posibles: $2^{|Q|^2*(|\Sigma|+1)*|\Gamma|*(|\Gamma^{Z}|-1)}$ ($\delta : Q \times (\Sigma \cup \{\lambda\}) \times \Gamma \rightarrow \mathcal{P}(Q \times \Gamma^{Z}-1)$)
 
 TODO: chequear $|\Gamma^*|$
 
@@ -66,9 +66,13 @@ en otras palabras, el número de estados es como máximo el doble del tamaño de
 
 Para el número de transiciones, se aplica un argumento aún más simple: de cada estado salen como máximo dos flechas, por lo que el número de transiciones es como máximo el doble del número de estados.
 
+#### Complejidad de pasar de AFND-$\lambda$ a AFND
+
+Sea $M = \langle Q, \Sigma, \delta, q_0, F \rangle$ un **AFND-$\lambda$**. Sea $n = |Q|$. Entonces, el algoritmo para pasar de **AFND-$\lambda$** a **AFND** tiene complejidad $O(n^3)$.
+
 #### Complejidad de determinizar un AFND
 
-Sea $M = \langle Q, \Sigma, \delta, q_0, F \rangle$ un **AFD**. Sea $n = |Q|$. Entonces, el algoritmo de determinización tiene complejidad $O(2^n)$.
+Sea $M = \langle Q, \Sigma, \delta, q_0, F \rangle$ un **AFND** o **AFND-$\lambda$**. Sea $n = |Q|$. Entonces, el algoritmo de determinización tiene complejidad $O(2^n)$.
 
 #### Complejidad de minimizar un AFD
 
