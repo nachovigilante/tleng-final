@@ -268,7 +268,23 @@ Luego, el algoritmo de minimización es el mismo.
 
 ### Solución
 
-1. TODO: completar
+1. Se puede usar el algorimo de Brzozowski que sabemos que es correcto y da un automata minimo. Recordemos el algoritmo de Brzozowski es:
+   ```
+   INPUT: AFD M = (Q, Σ, δ, q0, F) sin estados inaccesibles 
+   OUTPUT: AFD M' = (Q', Σ, δ', q0', F') mínimo equivalente a M
+
+   1. M^R = Invertir M
+   2. M^R_D = Determinizar M^R
+   3. (M^R_D)^R = Invertir M^R_D
+   OUTPUT: (M^R_D)^R
+   ```
+
+   Veamos que si pongo como input un automata que cumple las condiciones del enunciado, el output es el mismo automata.
+
+   1. Como solo hay un estado final $M^R$ tiene los mismos estados que $M$. 
+   2. Como $M$ era co-deterministico, $M^R$ es deterministico.
+   3. Al invertir $M^R$ obtenemos $M$ de nuevo.
+
 
 2. Contraejemplo:
 
@@ -453,6 +469,12 @@ Dar un algoritmo que transforme cada gramatica libre de contexto $G$ en otra $G'
 
 TODO: completar
 
+Idea chota pero que funciona: reemplazar 
+$A \rightarrow X_1...X_k$ por $A \rightarrow X_1A_1$ y $A_1 \rightarrow X_2A_2$ y asi sucesivamente con $A_i$ siendo un nuevo no terminal.
+
+
+
+
 ## Ejercicio 21
 
 Dar un algoritmo que transforme cada gramática libre de contexto $G$ sin producciones $A \rightarrow \lambda$ en otra $G'$ que reconoce el mismo lenguaje pero es tal que ninguna producción tiene un lado derecho con dos no-terminales seguidos. Justificar la correctitud y dar la complejidad del algoritmo.
@@ -464,6 +486,7 @@ Dar un algoritmo que transforme cada gramática libre de contexto $G$ sin produc
 - Pasar a forma normal de Greibach
 
 TODO: completar
+
 
 ## Ejercicio 22
 
