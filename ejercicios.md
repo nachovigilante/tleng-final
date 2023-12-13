@@ -323,7 +323,7 @@ Demostrar por inducción en el largo de las cadenas que el algoritmo es correcto
 - Concatenar $M$ y $M''$ para obtener $M'''$.
 - $M'''$ acepta $L(M)L(M)^R$.
 
-**Complejidad temporal**: TODO
+**Complejidad temporal**: $O(2^n)$ (por la determinización)
 
 **Correctitud**:
 
@@ -367,7 +367,6 @@ Construimos un autómata de pila vacía  $P' = \langle Q \cup \{q0', qf\}, \Sigm
 - $\forall q \in Q, \forall w \in \Sigma \cup \{\lambda\}, \forall x \in \tau \cup \{\lambda\}, \forall z \in \Gamma : \delta'(q, w, x, z) = \delta(q, w, x, z)$ para simular el comportamiento de $P$.
 - $\forall f \in F, \forall z \in \Gamma \cup \{X_0\}: \delta'(f, \lambda, \lambda, z) = \{(q_f, \lambda)\}$ que agregamos que los finales vayan al nuevo estado.
 - $\forall z \in \Gamma \cup \{X_0\}: \delta'(q_f, \lambda, \lambda, z) = \{(q_f, \lambda)\}$ que desapila.
-
 
 Correctitud:
 
@@ -469,11 +468,10 @@ Dar un algoritmo que transforme cada gramatica libre de contexto $G$ en otra $G'
 
 TODO: completar
 
-Idea chota pero que funciona: reemplazar 
+Idea chota pero que funciona: reemplazar
 $A \rightarrow X_1...X_k$ por $A \rightarrow X_1A_1$ y $A_1 \rightarrow X_2A_2$ y asi sucesivamente con $A_i$ siendo un nuevo no terminal.
 
-
-
+Eso no es Chomsky? Funciona pero no se si es lo que quiere porque te deja con solo 2 no terminales a la derecha.
 
 ## Ejercicio 21
 
@@ -483,10 +481,10 @@ Dar un algoritmo que transforme cada gramática libre de contexto $G$ sin produc
 
 ### Solución
 
+Idea general, todo: cerrar
+
 - Pasar a forma normal de Greibach
-
-TODO: completar
-
+- No seeeeeeeeeeeeee
 
 ## Ejercicio 22
 
@@ -613,8 +611,7 @@ Finalmente, esto se ejecuta para cada clase de equivalencia de manera independie
 
 ## Ejercicio 25
 
-Dar un algoritmo que dado un automata finito que reconoce un lenguaje infinito,
-lo transforma en otro que reconoce el mismo lenguaje y tiene al menos el doble de estados que el mínimo. Demostrar que el algoritmo es correcto.
+Dar un algoritmo que dado un automata finito que reconoce un lenguaje infinito, lo transforma en otro que reconoce el mismo lenguaje y tiene al menos el doble de estados que el mínimo. Demostrar que el algoritmo es correcto.
 
 ### Solución
 
