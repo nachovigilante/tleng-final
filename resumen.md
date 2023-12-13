@@ -232,6 +232,60 @@ Definamos $F' = \left
                     \end{array}
                 \right.$
 
+### Equivalencia expresiones regulares y autómatas finitos
+
+#### Teorema
+
+Dada una expresión regular $r$, existe un $AFND-\lambda$ $M$ con un solo estado
+final y sin transiciones a partir del mismo tal que $L(M) = L(r)$.
+
+#### Demostración
+
+##### Caso base
+
+Los casos base son 3:
+
+- $r = \emptyset$
+  
+  ![Alt text](image-7.png)
+
+- $r = \lambda$
+  
+  ![Alt text](image-8.png)
+
+- $r = a$, con $a \in \Sigma$
+  
+  ![Alt text](image-9.png)
+
+##### Caso inductivo
+
+Supongamos la expresión regular es $r_1|r_2$, $r_1r_2$, $r_1^*$, ó $r_2^+$ y asumimos que vale la propiedad para $r_1$ y para $r_2$.
+Es decir, tanto para $r_1$ como para $r_2$ existen AFND-λ M1 y M2 con un
+solo estado final y sin transiciones a partir del mismo, tal que
+$L(M_1) = L(r_1) y L(M_2) = L(r_2)$.
+
+- $r = r_1|r_2$
+  
+  Por h.i. existen $M1$ y $M_2$ ...
+
+  ![Alt text](image-10.png)
+
+- $r = r_1r_2$
+  
+  Por h.i. existen $M1$ y $M_2$ ...
+
+  ![Alt text](image-11.png)
+
+- $r = r_1^*$
+  
+  Por h.i. existe $M1$ ...
+
+  ![Alt text](image-12.png)
+
+- $r = r_2^+$
+  
+  Dado que $r_1^+ = r_1r_1^*$, queda demostrado por los casos anteriores.
+
 ### Cota para arbol de derivacion en gramática libre de contexto
 
 Página 314 de Aho.
