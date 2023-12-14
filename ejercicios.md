@@ -8,9 +8,7 @@ Dar un algoritmo que decida si dos expresiones regulares denotan el mismo lengua
 
 Sea $r_1$ y $r_2$ dos expresiones regulares. Construir un **AFND** $M_1$ que acepte $L(r_1)$ y un **AFND** $M_2$ que acepte $L(r_2)$. Luego, determinizar $M_1$ y $M_2$ para obtener $M_1'$ y $M_2'$, respectivamente. Finalmente, minimizar $M_1'$ y $M_2'$ para obtener $M_1''$ y $M_2''$, respectivamente. Si $M_1''$ y $M_2''$ son isomorfos, entonces $L(r_1) = L(r_2)$.
 
-Como está explicado en el resumen, el tamaño de un autómata construido a partir de una expresión regular está acotado por el doble del tamaño de dicha expresión. Luego, $Q_1 <= 2|r_1|$ y $Q_2 <= 2|r_2|$. Por lo tanto, la complejidad temporal de la construcción de los autómatas es $O(max\{|r_1|, |r_2|\})$. Por otro lado, es necesario determinizarlos, lo que conlleva una complejidad de $O(max\{2^{|r_1|}, 2^{|r_2|}\})$. Finalmente, hay que minimizarlos, lo que conlleva una complejidad de ???. Chequear el isomorfismo de grafos tiene una complejidad menor o igual a una exponencial en el tamaño de los grafos, por lo que no modifica la complejidad total del algoritmo.
-
-Complejidad total: $O(max\{2^{|r_1|}, 2^{|r_2|}\})$
+Como está explicado en el resumen, el tamaño de un autómata construido a partir de una expresión regular está acotado por el doble del tamaño de dicha expresión. Luego, $Q_1 <= 2|r_1|$ y $Q_2 <= 2|r_2|$. Por lo tanto, la complejidad temporal de la construcción de los autómatas es $O(|r_1|+|r_2|)$. Por otro lado, es necesario determinizarlos, lo que conlleva una complejidad de $O(2^{|r_1|} + 2^{|r_2|})$. Finalmente, hay que minimizarlos, lo que conlleva una complejidad de $O(2^{|r_1|}s*log(2^{|r_1|})+2^{|r_2|}s*log(2^{|r_2|}))$. Chequear el isomorfismo de grafos tiene una complejidad menor o igual a una exponencial en el tamaño de los grafos, que en este caso tienen tamaño $O(2^{|r_1|})$ y $O(2^{|r_2|})$, respectivamente. Por lo tanto, la complejidad de chequear el isomorfismo de grafos es $O(2^{2^{|r_1|}} + 2^{2^{|r_2|}})$. Por lo tanto, la complejidad temporal total del algoritmo es $O(2^{2^{|r_1|}} + 2^{2^{|r_2|}})$.
 
 ### Opción 2
 
@@ -18,7 +16,15 @@ Sea $r_1$ y $r_2$ dos expresiones regulares. Construir un **AFND** $M_1$ que ace
 
 Para chequear si $M_3'$ es vacío, se puede utilizar el algoritmo de búsqueda en profundidad (DFS) para recorrer el grafo del autómata. Si se llega a un estado final, entonces el autómata no es vacío. Si se recorren todos los estados y no se llega a un estado final, entonces el autómata es vacío.
 
-Por un análisis similar, la complejidad temporal de este algoritmo es $O(max\{2^{|r_1|}, 2^{|r_2|}\})$. Sin embargo, este algoritmo probablemente sea más eficiente que el anterior, ya que no es necesario minimizar los autómatas y chequear que sean isomorfos. La complejiad de chequear que un autómata sea vacío es $O(máx\{|r_1|, |r_2|\} * |\Sigma_1\cup\Sigma_2|)$
+Analizando la complejidad de las operaciones:
+
+- Construir un los **AFND** tiene una complejidad de $O(|r_1| + |r_2|)$
+- Determinizar los **AFND** tiene una complejidad de $O(2^{|r_1|} + 2^{|r_2|})$
+- Obtener el complemento de un **AFND** tiene complejidad lineal en la cantidad de estados, es decir, $O(2^{|r_1|} + 2^{|r_2|})$
+- Obtener la unión de los **AFND** tiene complejidad lineal en la cantidad de estados, es decir, $O(|r_1| + |r_2|)$ para la primera unión y $O(2^{|r_1|} + 2^{|r_2|})$ para la segunda unión.
+- Obtener la intersección de los **AFND** tiene complejidad de $O(|Q_1|*|Q_2|)$, es decir, $O((|r_1|+|r_2|) * (2^{|r_1|} + 2^{|r_2|}))$
+
+Por lo tanto, la complejidad temporal total del algoritmo es $O((|r_1|+|r_2|) * (2^{|r_1|} + 2^{|r_2|}))$.
 
 ### Opción 2 bis
 
