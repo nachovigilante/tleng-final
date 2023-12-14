@@ -479,6 +479,8 @@ $A \rightarrow X_1...X_k$ por $A \rightarrow X_1A_1$ y $A_1 \rightarrow X_2A_2$ 
 
 Eso no es Chomsky? Funciona pero no se si es lo que quiere porque te deja con solo 2 no terminales a la derecha.
 
+Quizas es mejor ir viendo cual es repetido y a ese si hacerle un nuevo no terminal?
+
 ## Ejercicio 21
 
 Dar un algoritmo que transforme cada gramática libre de contexto $G$ sin producciones $A \rightarrow \lambda$ en otra $G'$ que reconoce el mismo lenguaje pero es tal que ninguna producción tiene un lado derecho con dos no-terminales seguidos. Justificar la correctitud y dar la complejidad del algoritmo.
